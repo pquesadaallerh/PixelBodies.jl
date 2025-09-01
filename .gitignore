@@ -1,0 +1,33 @@
+.ipynb_checkpoints
+.vscode/
+.idea/
+.venv/
+.DS_Store
+Manifest.toml
+/docs/build/
+__pycache__/
+
+# gfx
+*.png
+!test/resources/
+*.jpg
+*.gif
+*.mp4
+*.svg
+*.pdf
+*.ogv
+
+# data file
+*.dat
+*.txt
+!requirements.txt
+*.log
+*.json
+
+# paraview
+*.vti
+*.pvd
+*.npz
+
+# exceptions
+!/picture_sim_python_app/input/input.png
