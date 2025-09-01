@@ -1,0 +1,26 @@
+# Root Makefile for PixelBodies.jl mixed project
+
+PYTHON_DIR = picture_sim_python_app
+PYTHON_VENV = $(PYTHON_DIR)/.venv
+JULIA_PROJECT = .
+
+.PHONY: setup setup-python setup-julia clean
+
+setup: setup-python setup-julia
+
+setup-python:
+	@echo ">>> Setting up Python virtual environment..."
+	cd $(PYTHON_DIR) && python3 -m venv .venv
+	. $(PYTHON_VENV)/bin/activate && pip install --upgrade pip
+	if [ -f $(PYTHON_DIR)/requirements.txt ]; then \
+		. $(PYTHON_VENV)/bin/activate && pip install -r requirements.txt; \
+	fi
+
+setup-julia:
+	@echo ">>> Setting up Julia environment..."
+	julia --project=$(JULIA_PROJECT) -e 'using Pkg; Pkg.instantiate()'
+
+clean:
+	@echo ">>> Removing environments..."
+	rm -rf $(PYTHON_VENV)
+	rm -rf $(JULIA_PROJECT)/Manifest.toml
