@@ -9,7 +9,7 @@ from picture_sim_python_app.characteristic_length_and_aoa_estimation import char
 from picture_sim_python_app.detect_airfoil_type import detect_airfoil_type
 from picture_sim_python_app.live_simulation import run_julia_simulation_script
 from picture_sim_python_app.pixel_body_python import PixelBodyMask
-from symlink_utils import ensure_link, safe_unlink_windows
+from picture_sim_python_app.symlink_utils import ensure_link, safe_unlink_windows
 
 # OS-specific imports (some features did not work as expected on a Windows device and required tweaks. In the future
 # it would be better to merge the two implementations into one, but due to time constraints there are two parallel
