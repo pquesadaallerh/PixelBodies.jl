@@ -1,11 +1,5 @@
-using FileIO, Images, ImageDistances, ImageTransformations, Plots
-using LinearAlgebra
-try
-    using CUDA
-    CUDA.allowscalar(false)
-catch e
-    @warn "CUDA not available, running on CPU only." exception=e
-end
+using FileIO, Images, ImageDistances, ImageTransformations, Plots, LinearAlgebra, WaterLily
+import WaterLily: AbstractBody, Flow, measure!, measure_sdf!, apply!, interp, BC!, SVector
 import Statistics: mean
 
 """
@@ -60,7 +54,7 @@ function PixelBody(
     sdf = Float32.(distance_transform(feature_transform(.!mask_padded)) .- distance_transform(feature_transform(mask_padded)))
     
     # Smooth zeroth-moment vector μ₀ using kernel (1=fluid, 0=solid)
-    μ₀_array = mem(Float32.(μ₀.(sdf, Float32(ϵ))))
+    μ₀_array = mem(Float32.(WaterLily.μ₀.(sdf, Float32(ϵ))))
 
     # # TEMP Debug plot
     # display(heatmap(Array(μ₀_array)', color=:viridis, title="μ₀ Smoothed Mask", aspect_ratio=:equal))
@@ -140,7 +134,7 @@ function PixelBody(
     sdf = Float32.(distance_transform(feature_transform(.!mask_padded)) .- distance_transform(feature_transform(mask_padded)))
 
     # TODO: Smooth zeroth-moment vector μ₀ using kernel (Need to find out how to use properly to create the solid-fluid gradient)
-    μ₀_array = mem(Float32.(μ₀.(sdf, Float32(ϵ))))
+    μ₀_array = mem(Float32.(WaterLily.μ₀.(sdf, Float32(ϵ))))
 
     # TODO: TEMP plots for debugging
     # display(heatmap(Array(img), color=:coolwarm, title="Raw image", aspect_ratio=:equal))

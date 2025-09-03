@@ -1,5 +1,4 @@
-# new file stuff.
-using WaterLily,StaticArrays
+using WaterLily, PixelBodies
 
 # set up circle example
 circle(radius,center) = AutoBody((x,t) -> √sum(abs2, x .- center) - radius)
