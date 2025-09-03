@@ -601,14 +601,11 @@ def stop_display_processes():
             print(f"[display] Failed to stop process {pid}: {e}")
     return stopped
 
-def start_display_process(script_dir: Path, monitor_index=1, use_qt_version=True, flip_90_degrees=False):
+def start_display_process(script_dir: Path, monitor_index=1, use_qt_version=True):
     """Start the display process."""
     try:
         if use_qt_version:
-            if flip_90_degrees:
-                script_path = script_dir / "persistent_gif_display" / "persistent_gif_display_pyqt5_90_deg.py"
-            else:
-                script_path = script_dir / "persistent_gif_display" / "persistent_gif_display_pyqt5.py"
+            script_path = script_dir / "persistent_gif_display" / "persistent_gif_display_pyqt5.py"
         else:
             script_path = script_dir / "persistent_gif_display" / "persistent_gif_display.py"
 
@@ -627,10 +624,10 @@ def start_display_process(script_dir: Path, monitor_index=1, use_qt_version=True
         print(f"[display] Failed to start display process: {e}")
         return None
 
-def restart_display_process(script_dir: Path, monitor_index=1, use_qt_version=True, flip_90_degrees=False):
+def restart_display_process(script_dir: Path, monitor_index=1, use_qt_version=True):
     """Stop existing display processes and start a new one."""
     print("[display] Restarting display process...")
     stopped_pids = stop_display_processes()
     time.sleep(1)  # Brief pause between stop and start
-    new_pid = start_display_process(script_dir, monitor_index, use_qt_version, flip_90_degrees)
+    new_pid = start_display_process(script_dir, monitor_index, use_qt_version)
     return new_pid

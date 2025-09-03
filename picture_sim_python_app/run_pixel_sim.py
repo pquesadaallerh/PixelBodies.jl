@@ -180,7 +180,6 @@ def run_simulation(settings):
                 script_dir=SCRIPT_DIR,
                 monitor_index=1,
                 use_qt_version=True,
-                flip_90_degrees=flip_90_degrees,
             )
 
         else:
