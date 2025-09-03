@@ -9,7 +9,6 @@ import cv2
 import numpy as np
 import psutil
 from PIL import Image, ImageSequence
-import pygame
 
 
 def enumerate_cameras(max_cameras: int = 5, timeout_per_camera: float = 2.0) -> list:

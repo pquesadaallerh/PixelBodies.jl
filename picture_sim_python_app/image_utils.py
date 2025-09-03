@@ -5,7 +5,6 @@ from pathlib import Path
 import cv2
 import numpy as np
 from PIL import Image, ImageSequence
-import pygame
 
 def load_cached_bbox(cache_file: Path):
     """Load cached bounding box if it exists."""
