@@ -5,10 +5,10 @@ import time
 
 import yaml
 
-from picture_sim_app.characteristic_length_and_aoa_estimation import characteristic_length_and_aoa_pca
-from picture_sim_app.detect_airfoil_type import detect_airfoil_type
-from picture_sim_app.live_simulation import run_julia_simulation_script
-from picture_sim_app.pixel_body_python import PixelBodyMask
+from picture_sim_python_app.characteristic_length_and_aoa_estimation import characteristic_length_and_aoa_pca
+from picture_sim_python_app.detect_airfoil_type import detect_airfoil_type
+from picture_sim_python_app.live_simulation import run_julia_simulation_script
+from picture_sim_python_app.pixel_body_python import PixelBodyMask
 from symlink_utils import ensure_link, safe_unlink_windows
 
 # OS-specific imports (some features did not work as expected on a Windows device and required tweaks. In the future
@@ -19,11 +19,11 @@ IS_WINDOWS = platform.system() == "Windows"
 
 # TODO: Merge the two implementations into one
 if IS_WINDOWS:
-    from picture_sim_app.image_utils_windows import (
+    from picture_sim_python_app.image_utils_windows import (
         capture_image, stop_display_processes, restart_display_process,
 )
 else:
-    from picture_sim_app.image_utils import (
+    from picture_sim_python_app.image_utils import (
         capture_image,
     )
 
