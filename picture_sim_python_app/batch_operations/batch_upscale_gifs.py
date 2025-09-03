@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from picture_sim_app.image_utils import get_gif_dimensions, resize_gif
+from picture_sim_python_app.image_utils import get_gif_dimensions, resize_gif
 
 # Define paths (static)
 INPUT_AIRFOIL_IMAGES = [

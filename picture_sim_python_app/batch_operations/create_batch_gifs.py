@@ -5,10 +5,10 @@ from tqdm import tqdm
 import numpy as np
 import yaml
 
-from picture_sim_app.characteristic_length_and_aoa_estimation import characteristic_length_and_aoa_pca
-from picture_sim_app.image_utils import get_gif_dimensions, resize_gif
-from picture_sim_app.live_simulation import run_julia_simulation_script
-from picture_sim_app.pixel_body_python import PixelBodyMask
+from picture_sim_python_app.characteristic_length_and_aoa_estimation import characteristic_length_and_aoa_pca
+from picture_sim_python_app.image_utils import get_gif_dimensions, resize_gif
+from picture_sim_python_app.live_simulation import run_julia_simulation_script
+from picture_sim_python_app.pixel_body_python import PixelBodyMask
 
 
 logging.basicConfig(level=logging.INFO)

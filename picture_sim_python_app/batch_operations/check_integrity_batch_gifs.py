@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 
-from picture_sim_app.image_utils import get_gif_dimensions
+from picture_sim_python_app.image_utils import get_gif_dimensions
 
 
 # Define paths (static)
