@@ -20,8 +20,8 @@ def run_julia_simulation_script(
     mask_file = output_folder / "temp_mask.npy"
     np.save(mask_file, domain_mask)
 
-    # Run Julia script 'TestPixelCamSim.jl'
-    julia_script = script_dir.parent / "test" / "TestPixelCamSim.jl"
+    # Run Julia script 'PixelCamSim.jl'
+    julia_script = script_dir.parent / "scripts" / "PixelCamSim.jl"
 
     # Verify Julia script path
     if not julia_script.is_file():
@@ -51,7 +51,7 @@ def run_julia_simulation_script(
     ]
     print(f"Starting Julia: {' '.join(cmd)}\n")
 
-    result = subprocess.run(cmd, stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr)
+    result = subprocess.run(cmd, stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr, cwd=script_dir.parent)
 
     # Clean up temporary mask file
     if mask_file.exists():
