@@ -1,25 +1,22 @@
 import Pkg
-# Activate the project in the parent directory of this script (to use local WaterLily.jl)
+# Activate the project in the parent directory of this script (to use the correct Julia env)
  Pkg.activate(joinpath(@__DIR__, ".."))
 
-# Pkg.activate("..")          # Use the project in WaterLily.jl/
-# Pkg.activate(".")          # Use the project in WaterLily.jl/
-# Pkg.develop(path="..")      # Register WaterLily as a dev package (one time only)
+#TEMP: Use local version of PathLines (only needs to run once, then comment out)
+# using Pkg
+# Pkg.activate(".")                           # your project
+# Pkg.rm("PathLines")        # (only if already added)
+# Pkg.develop(path="/Users/pquesadaallerh/repos/water_lily/PathLines.jl")
 
-using WaterLily, StaticArrays, Plots, StatsBase
-using NPZ  # For reading numpy files
-try
-    using CUDA
-    CUDA.allowscalar(false)
-catch e
-    @warn "CUDA not available, running on CPU only." exception=e
-end
-push!(LOAD_PATH, joinpath(@__DIR__, "..", "..", "Pathlines.jl", "src")) # For now import local version 
+using WaterLily, StaticArrays, Plots, StatsBase, PixelBodies
+using NPZ  # For reading numpy data file
+
+push!(LOAD_PATH, joinpath(@__DIR__, "..", "..", "water_lily/Pathlines.jl", "src")) # For now import local version 
                                                                         # of Pathlines (Pathlines.jl/src/ needs to be in the 
                                                                         # same dir level as this root dir)
-include(joinpath(@__DIR__, "plot_particles.jl"))  # Add module containing particle plotting functions
-include(joinpath(@__DIR__, "run_sim.jl"))  # Simulation runner
-include(joinpath(@__DIR__, "plot_heatmaps.jl"))  # Heatmap plotting functions
+include(joinpath(@__DIR__, "../utils/plot_particles.jl"))  # Add module containing particle plotting functions
+include(joinpath(@__DIR__, "../utils/run_sim.jl"))  # Simulation runner
+include(joinpath(@__DIR__, "../utils/plot_heatmaps.jl"))  # Heatmap plotting functions
 
 # set up airfoil simulation from boolean mask
 function PixelSimAirfoilFromMask(mask_file; Re=200, ϵ=1, LS=nothing, mem=Array)
@@ -27,11 +24,11 @@ function PixelSimAirfoilFromMask(mask_file; Re=200, ϵ=1, LS=nothing, mem=Array)
     mask = npzread(mask_file)
     
     # Create PixelBody using the mask constructor
-    airfoil_pixel_body = WaterLily.PixelBody(mask; ϵ=ϵ, mem=mem)
+    airfoil_pixel_body = PixelBody(mask; ϵ=ϵ, mem=mem)
     
     # Use provided characteristic length, otherwise estimate it
     if LS === nothing
-        LS, _ = WaterLily.estimate_characteristic_length(airfoil_pixel_body, method="pca", plot_method=false)
+        LS, _ = PixelBodies.estimate_characteristic_length(airfoil_pixel_body, method="pca", plot_method=false)
     end
     
     n, m = size(airfoil_pixel_body.μ₀)
