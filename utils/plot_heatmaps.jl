@@ -38,7 +38,7 @@ Uses the same visualization approach as WaterLily's sim_gif! function.
 """
 function create_heatmap_gif_from_data!(
     data::AbstractArray{T,3};
-    save_path="temp_heatmap.gif",  # Changed from hardcoded path
+    save_path="temp_heatmap.gif",
     time_points=nothing,
     verbose=true,
     cfill=:RdBu_11,

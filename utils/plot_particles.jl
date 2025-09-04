@@ -1,8 +1,5 @@
-using ImageMorphology
+using ImageMorphology, Pathlines
 import GLMakie
-# push!(LOAD_PATH, "../Pathlines.jl/src/" ) # For now import local version of Pathlines
-using Pathlines
-
 
 function sim_gif_particles!(
     sim::Simulation;
@@ -67,15 +64,12 @@ function create_particle_gif_from_data!(
     GLMakie.hidedecorations!(ax)
     
     # Create ParticleViz object to maintain proper smoothing and state
-    # We'll use the average delta time for initialization
     avg_dt = sum(sim_data.delta_times) / length(sim_data.delta_times)
     
     # Create a dummy Particles object for ParticleViz initialization
-    # We need to provide a proper flow field, so we'll create a minimal one
     N = length(sim_data.positions[1])
     
     # Create a minimal flow field structure for Particles initialization
-    # Since we're only using this for visualization, we can use a simple approach
     domain_size = size(sim_data.body_mask)
     dummy_σ = zeros(domain_size..., 2)  # Simple 2D velocity field
     
