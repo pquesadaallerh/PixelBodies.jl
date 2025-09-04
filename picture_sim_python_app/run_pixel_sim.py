@@ -81,6 +81,19 @@ def run_simulation(settings):
     object_is_airfoil = True
 
     if not simulation_settings["use_precomputed_results"]:
+        # Ensure prior symlinks (from a precomputed run) are removed to avoid overwriting precomputed assets
+        for p in (output_path_particle_plot, output_path_heatmap_vorticity, output_path_heatmap_pressure):
+            if p.is_symlink():
+                try:
+                    target = p.resolve()
+                    print(f"Removing symlink {p} -> {target}.")
+                    if IS_WINDOWS:
+                        safe_unlink_windows(p)
+                    else:
+                        p.unlink()
+                except Exception as e:
+                    print(f"Warning: failed to unlink symlink {p}: {e}")
+
         # Estimate characteristic length and angle of attack using PCA
         l_c, aoa, thickness = characteristic_length_and_aoa_pca(
             mask=domain_mask,
