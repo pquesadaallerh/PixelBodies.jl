@@ -4,7 +4,7 @@ using Plots
 cID = "2DCircle"
 
 function circle(n,m;Re=250,U=1,mem=Array)
-    radius, center = m/8, m/2
+    radius, center = Float32(m/8), Float32(m/2)
     body = AutoBody((x,t)->√sum(abs2, x .- center) - radius)
     Simulation((n,m), (U,0), radius; ν=U*radius/Re, body, mem)
 end
