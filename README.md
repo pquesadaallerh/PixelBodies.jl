@@ -25,6 +25,12 @@ install dependencies then simply type
 Pkg.instantiate() 
 ```
 
+NOTE: At the moment, Pathogen.jl is not registered in the
+General registry, so you need to add it manually by cloning the
+[Pathlines.jl](https://github.com/WaterLily-jl/Pathlines.jl)
+repo and then using `Pkg.develop(path="path_to_cloned_repo")` to point Julia to 
+the local copy. This needs to be done before running `Pkg.instantiate()`.
+
 #### Python project (picture_sim_python_app)
 To initialize the Python project, first create a Python virtual environment
 in the folder 'picture_sim_python_app' using venv (or your preferred package manager):
