@@ -20,7 +20,7 @@ io_settings:
 
   camera_index: 0
 
-capture_image_aspect_ratio: [3, 2]
+capture_image_aspect_ratio: [3, 2] # Select the aspect ratio of the bounding box from the camera feed.
 
 simulation_settings:
 
@@ -30,8 +30,7 @@ simulation_settings:
   solid_color: "gray"  # Options are gray, red, green or blue
   manual_mode: false  # Set to true to use provided threshold values, otherwise smart detection is used
   force_invert_mask: false  # Set to true to force mask inversion if smart logic fails
-  image_recognition_debug_mode: true  # Set to true to plot the image recognition mask
-  show_components_pca: true  # Set to true to plot the PCA components (image_recognition_debug_mode also needs to be true).
+  image_recognition_debug_mode: true  # Set to true to plot the image recognition mask and PCA components
 
   # Image resolution cap (spatial resolution)
   max_image_res: 800  
@@ -45,10 +44,10 @@ simulation_settings:
   epsilon: 1.0  # BDIM kernel width
 
   # Other settings
-  verbose: false
+  verbose: true
 
   mem: "Array"  # Memory type: "Array" or "CuArray"
   target_size: [ 800, 800 ]  # Target size for the output GIF
 
-  use_precomputed_results: true  # If true, uses precomputed results instead of running the simulation
+  use_precomputed_results: false  # If true, uses precomputed results instead of running the simulation
   gif_display: "both" # Options: "both", "particle_plot", "heatmap"

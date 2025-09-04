@@ -45,7 +45,7 @@ def run_simulation(settings):
         fixed_aspect_ratio=tuple(settings["capture_image_aspect_ratio"]),  # Aspect ratio of the selection box (width:height)
         selection_box_mode=True,  # Click-and-drag selection box
         # fixed_size=(800, 600),    # Alternative: exact pixel dimensions
-        use_cached_box=True,  # Fixed typo: was use_chached_box
+        use_cached_box=True,
         camera_index=settings["io_settings"]["camera_index"],
     )
 
@@ -61,11 +61,6 @@ def run_simulation(settings):
     # Unpack simulation settings:
     simulation_settings = settings["simulation_settings"]
     image_recognition_debug_mode = simulation_settings["image_recognition_debug_mode"]
-    show_components_pca = simulation_settings["show_components_pca"]
-
-    if show_components_pca and not image_recognition_debug_mode:
-        raise Exception("'show_components_pca' is set to True, but 'image_recognition_debug_mode' is False."
-                        "\n set 'image_recognition_debug_mode' to True to see PCA components.")
 
     # Use image recognition to create a fluid-solid mask (1=Fluid, 0=Solid)
     pixel_body = PixelBodyMask(
@@ -90,7 +85,7 @@ def run_simulation(settings):
         l_c, aoa, thickness = characteristic_length_and_aoa_pca(
             mask=domain_mask,
             plot_method=image_recognition_debug_mode,
-            show_components=show_components_pca,
+            show_components=image_recognition_debug_mode,
             object_is_airfoil=object_is_airfoil,
         )
 
@@ -117,7 +112,7 @@ def run_simulation(settings):
         l_c, aoa, thickness = characteristic_length_and_aoa_pca(
             mask=domain_mask,
             plot_method=image_recognition_debug_mode,
-            show_components=show_components_pca,
+            show_components=image_recognition_debug_mode,
             object_is_airfoil=object_is_airfoil,
         )
         if flip_90_degrees:
