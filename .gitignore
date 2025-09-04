@@ -9,7 +9,6 @@ __pycache__/
 
 # gfx
 *.png
-!test/resources/
 *.jpg
 *.gif
 *.mp4
@@ -23,6 +22,7 @@ __pycache__/
 !requirements.txt
 *.log
 *.json
+*.npy
 
 # paraview
 *.vti
@@ -30,4 +30,5 @@ __pycache__/
 *.npz
 
 # exceptions
-!/picture_sim_python_app/input/input.png
+!test/resources/
+!/resources/
